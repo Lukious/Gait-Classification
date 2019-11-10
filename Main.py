@@ -42,3 +42,20 @@ Sensors = train_data[["L_sensor1","L_seonsor2","L_sensor3","L_sensor4","R_sensor
 Gyros = train_data[["L_gyroX","L_gyroY","L_gyroZ","R_gyroX","R_gyroY","R_gyroZ"]]
 without_COP_all = train_data[["L_sensor1","L_seonsor2","L_sensor3","L_sensor4","R_sensor1","R_sensor2","R_sensor3","R_sensor4","L_accX","L_accY","L_accZ","L_gyroX","L_gyroY","L_gyroZ","R_accX","R_accY","R_accZ","R_gyroX","R_gyroY","R_gyroZ"]]
 Accs = train_data[["L_accX","L_accY","L_accZ","R_accX","R_accY","R_accZ"]]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    input_x,
+    input_y,
+    test_size=0.3, random_state=0)
+
+X = tf.placeholder(dtype=tf.float32, shape=[None, num_features])
+Y = tf.placeholder(dtype=tf.int64, shape=[None])
+
+model = TSNE(learning_rate = 100)
+transformed_a = model.fit_transform(Accs)
+xs = transformed_a[:,0]
+ys = transformed_a[:,1]
+plt.scatter(xs,ys)
+plt.show()
+
+
