@@ -51,6 +51,34 @@ X_train, X_test, y_train, y_test = train_test_split(
 X = tf.placeholder(dtype=tf.float32, shape=[None, num_features])
 Y = tf.placeholder(dtype=tf.int64, shape=[None])
 
+# T-SNE
+model = TSNE(learning_rate = 100)
+transformed = model.fit_transform(L_accs)
+xs = transformed[:,0]
+ys = transformed[:,1]
+plt.scatter(xs,ys)
+plt.show()
+
+# T-SNE test (init PCA )
+L_accs_tnse_result = TSNE(learning_rate=100, init='pca').fit_transform(L_accs)
+xs = L_accs_tnse_result[:,0]
+ys = L_accs_tnse_result[:,1]
+plt.scatter(xs,ys)
+plt.show()
+# df_L_accs = (pd.DataFrame(L_acc_tnse_result, columns=['V1','V2']).assign(type = data[normaml or not]))
+
+
+
+# PCA Implement 
+pca = PCA(n_components=2)
+pc = pca.fit_transform(transformed)
+plt.scatter(pc[:,0],pc[:,1])
+
+
+
+# Test all Data
+#print(without_COP_all)
+
 model = TSNE(learning_rate = 100)
 transformed_a = model.fit_transform(Accs)
 xs = transformed_a[:,0]
@@ -59,3 +87,15 @@ plt.scatter(xs,ys)
 plt.show()
 
 
+ #KMEANS
+ model = KMeans(n)
+
+ L_sensors.plot.line()
+ L_accs.plot.line()
+ L_gyros.plot.line()
+
+ R_sensors.plot.line()
+ R_accs.plot.line()
+ R_gyros.plot.line()
+
+ COPs.plot.line()
